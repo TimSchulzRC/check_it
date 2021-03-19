@@ -67,18 +67,8 @@ class Data extends ChangeNotifier {
 
   void toggleDone(index) {
     tasks[index].isDone = !tasks[index].isDone;
-    if (tasks[index].isDone) {
-      Task item = tasks.removeAt(index);
-      tasks.insert(tasks.length, item);
-      setPosition();
-    } else {
-      Task item = tasks.removeAt(index);
-      tasks.insert(0, item);
-      setPosition();
-    }
     DBProvider.db.saveTasks(tasks);
     getToDoNumber();
-
     notifyListeners();
   }
 
