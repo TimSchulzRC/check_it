@@ -5,6 +5,7 @@ import 'package:check_it_fixed_version/constants.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:provider/provider.dart';
 import 'screens/tasks_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() =>
     runApp(ChangeNotifierProvider(create: (context) => Data(), child: MyApp()));
@@ -16,6 +17,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   bool haveData = false;
+  SharedPreferences sharedPreferences;
 
   getData() async {
     await DBProvider.db.getTasks(Provider.of<Data>(context).tasks);
@@ -24,6 +26,16 @@ class _MyAppState extends State<MyApp> {
       setState(() {});
     }
     haveData = true;
+  }
+
+  @override
+  void initState() {
+    initSharedPreferences();
+    super.initState();
+  }
+
+  initSharedPreferences() async {
+    sharedPreferences = await SharedPreferences.getInstance();
   }
 
   @override
