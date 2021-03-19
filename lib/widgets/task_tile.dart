@@ -1,4 +1,3 @@
-import 'package:circular_check_box/circular_check_box.dart';
 import 'package:flutter/material.dart';
 import 'package:check_it_fixed_version/constants.dart';
 
@@ -23,7 +22,7 @@ class _TaskTileState extends State<TaskTile> {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: CircularCheckBox(
+      leading: Checkbox(
         activeColor: kAccent,
         value: widget.isChecked,
         onChanged: widget.checkBoxCallback,

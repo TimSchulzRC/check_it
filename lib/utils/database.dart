@@ -2,6 +2,7 @@ import 'package:check_it_fixed_version/models/tasks.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:sqflite/sqlite_api.dart';
+import 'dart:convert';
 
 class DBProvider {
   DBProvider._();
@@ -56,5 +57,16 @@ class DBProvider {
       db.insert('tasks', task.toMap());
       print('tasks saved');
     }
+    saveData(tasks);
   }
+}
+
+void saveData(tasks) {
+  List<String> spList;
+  for (Task task in tasks) {
+    var newListItem = json.encode(task.toMap());
+    print(newListItem);
+    spList.add(newListItem);
+  }
+  print(spList);
 }
